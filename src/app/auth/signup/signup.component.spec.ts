@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SignupComponent } from './signup.component';
+import { NgForm } from '@angular/forms';
+import { AppModule } from '../../app.module';
 
 describe('SignupComponent', () => {
   let component: SignupComponent;
@@ -8,7 +10,9 @@ describe('SignupComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SignupComponent ]
+      imports: [
+        AppModule
+      ]
     })
     .compileComponents();
   });
@@ -21,5 +25,9 @@ describe('SignupComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should submit the form', () => {
+    expect(component.submit(null)).toBeFalsy();
   });
 });
