@@ -15,6 +15,8 @@ import { MaterialModule } from './material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ToolbarComponent } from './navigation/toolbar/toolbar.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     CurrentComponent,
     NewComponent,
     PastComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ToolbarComponent,
+    SidenavListComponent
   ],
   imports: [
     AppRoutingModule,
