@@ -1,5 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
+
+let fixture;
+let component;
+let el;
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,25 +12,26 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-    }).compileComponents();
+    }).compileComponents().then(() => {
+      fixture = TestBed.createComponent(AppComponent);
+      component = fixture.componentInstance;
+
+      el = fixture.debugElement;
+    });
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should have as title 'angular-material-academind'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-material-academind');
+    expect(component.title).toEqual('angular-material-academind');
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-material-academind app is running!');
+
+    const title = el.query(By.css('.content span')).nativeElement;
+    expect(title.textContent).toContain('angular-material-academind app is running!');
   });
 });
