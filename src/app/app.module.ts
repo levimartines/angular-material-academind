@@ -18,6 +18,13 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ToolbarComponent } from './navigation/toolbar/toolbar.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { StopTrainingComponent } from './training/current/stop-training.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -39,11 +46,20 @@ import { StopTrainingComponent } from './training/current/stop-training.componen
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      },
+      defaultLanguage: 'en'
+    })
   ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'}
+    {provide: MAT_DATE_LOCALE, useValue: 'en-US'}
   ],
   bootstrap: [AppComponent]
 })
