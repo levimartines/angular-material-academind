@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ToolbarComponent } from './navigation/toolbar/toolbar.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+import { StopTrainingComponent } from './training/current/stop-training.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.com
     PastComponent,
     WelcomeComponent,
     ToolbarComponent,
-    SidenavListComponent
+    SidenavListComponent,
+    StopTrainingComponent
   ],
   imports: [
     AppRoutingModule,
