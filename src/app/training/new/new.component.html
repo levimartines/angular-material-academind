@@ -5,9 +5,9 @@
     </mat-card-header>
     <mat-card-content fxLayoutAlign="center">
       <mat-form-field appearance="fill">
-        <mat-label>Type of Training</mat-label>
-        <mat-select ngModel #option="ngModel">
-          <mat-option *ngFor="let type of types" [value]="type.value">
+        <mat-label>Choose a exercise</mat-label>
+        <mat-select ngModel required #option="ngModel">
+          <mat-option *ngFor="let type of trainings" [value]="type.id">
             {{type.name}}
           </mat-option>
         </mat-select>
@@ -15,8 +15,11 @@
     </mat-card-content>
 
     <mat-card-actions fxLayoutAlign="center">
-      <button mat-raised-button type="submit" color="primary" (click)="startTraining.emit()"
-        [disabled]="!option.value">Start!</button>
+      <button
+        mat-raised-button type="submit" color="primary"
+        [disabled]="option.invalid" (click)="startTraining(option.value)">
+        Start!
+      </button>
     </mat-card-actions>
   </mat-card>
 </section>

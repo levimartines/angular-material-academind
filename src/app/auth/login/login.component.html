@@ -1,7 +1,7 @@
 <section>
   <form
     fxLayout="column" fxLayoutAlign="center center"
-    (ngSubmit)="submit()" [formGroup]="loginForm">
+    (ngSubmit)="submit()" [formGroup]="form">
     <mat-form-field appearance="standard">
       <mat-label>E-mail</mat-label>
       <input
@@ -17,7 +17,7 @@
     </mat-form-field>
 
     <button
-      mat-raised-button [disabled]="loginForm.invalid" type="submit"
+      mat-raised-button [disabled]="form.invalid" type="submit"
       color="primary" class="button-submit">Submit
     </button>
   </form>

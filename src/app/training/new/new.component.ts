@@ -1,9 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
-interface ITypes {
-  name: string;
-  value: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { TrainingService } from '../training.service';
+import { ExerciseModel } from '../exercise.model';
 
 @Component({
   selector: 'app-new',
@@ -11,18 +8,17 @@ interface ITypes {
   styleUrls: ['./new.component.css']
 })
 export class NewComponent implements OnInit {
-  @Output() startTraining = new EventEmitter<void>();
-  types: ITypes[] = [
-    {name: 'Crunches', value: 'crunches'},
-    {name: 'Touch Toes', value: 'touch_toes'},
-    {name: 'Side Lunges', value: 'side_lunges'},
-    {name: 'Burpees', value: 'burpees'}
-  ];
+  trainings: ExerciseModel[];
 
-  constructor() {
+  constructor(private service: TrainingService) {
   }
 
   ngOnInit(): void {
+    this.trainings = this.service.getAvailableExercises();
+  }
+
+  startTraining(trainingId: string): void {
+    this.service.startExercise(trainingId);
   }
 
 }
