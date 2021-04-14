@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form);
     this.service.login({
       email: this.form.value.email,
       password: this.form.value.password

@@ -18,7 +18,6 @@ export class SignupComponent implements OnInit {
   }
 
   submit(form: NgForm): void {
-    console.log(form);
     this.service.register({
       email: form.value.email,
       password: form.value.password

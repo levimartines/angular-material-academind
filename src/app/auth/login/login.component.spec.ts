@@ -9,7 +9,7 @@ describe('LoginComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [AppModule]
+      imports: [ AppModule ]
     })
     .compileComponents().then(() => {
       fixture = TestBed.createComponent(LoginComponent);

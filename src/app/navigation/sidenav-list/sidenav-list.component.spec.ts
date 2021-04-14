@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidenavListComponent } from './sidenav-list.component';
+import { AppModule } from '../../app.module';
+import { AuthService } from '../../auth/auth.service';
 
 describe('SidenavListComponent', () => {
   let component: SidenavListComponent;
@@ -8,7 +10,8 @@ describe('SidenavListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidenavListComponent ]
+      imports: [ AppModule ],
+      providers: [ AuthService ]
     })
     .compileComponents();
   });
@@ -21,5 +24,9 @@ describe('SidenavListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create', () => {
+    expect(component.onLogoutClick()).toBeFalsy();
   });
 });

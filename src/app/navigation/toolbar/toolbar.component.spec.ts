@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ToolbarComponent } from './toolbar.component';
+import { AppModule } from '../../app.module';
+import { AuthService } from '../../auth/auth.service';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
@@ -8,7 +10,8 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
+      imports: [ AppModule ],
+      providers: [ AuthService ]
     })
     .compileComponents();
   });
@@ -19,7 +22,9 @@ describe('ToolbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', waitForAsync(() => {
+    const service = TestBed.inject(AuthService);
+    service.authChange.next(true);
     expect(component).toBeTruthy();
-  });
+  }));
 });

@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
   @Output() toggleSidenav = new EventEmitter<void>();
-  isAuth$: Subscription;
+  isAuth$: Subscription = new Subscription();
   isAuth = false;
 
   constructor(private authService: AuthService) {

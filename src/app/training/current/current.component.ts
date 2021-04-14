@@ -26,7 +26,7 @@ export class CurrentComponent implements OnInit {
   }
 
   startTraining(): void {
-    const stepTime = this.exercise?.duration / 60;
+    const stepTime = this.exercise.duration / 60;
     this.interval = setInterval(() => {
       this.progressValue += 1;
       if (this.progressValue >= 100) {

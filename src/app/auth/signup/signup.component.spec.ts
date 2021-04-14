@@ -28,6 +28,8 @@ describe('SignupComponent', () => {
   });
 
   it('should submit the form', () => {
-    expect(component.submit(null)).toBeFalsy();
+    expect(component.submit({
+      value: {email: 'test@test.com', password: 'pass123'}
+    } as NgForm)).toBeFalsy();
   });
 });

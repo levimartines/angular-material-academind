@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PastComponent } from './past.component';
+import { AppModule } from '../../app.module';
 
 describe('PastComponent', () => {
   let component: PastComponent;
@@ -8,7 +9,7 @@ describe('PastComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PastComponent ]
+      imports: [ AppModule ]
     })
     .compileComponents();
   });
@@ -21,5 +22,9 @@ describe('PastComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should filter', () => {
+    expect(component.applyFilter({target: {value: 'TEST'}} as unknown as Event)).toBeFalsy();
   });
 });
