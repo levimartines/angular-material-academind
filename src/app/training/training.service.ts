@@ -9,10 +9,10 @@ export class TrainingService {
   exerciseStartStop = new Subject<boolean>();
   private currentTraining: ExerciseModel;
   private availableExercises: ExerciseModel[] = [
-    {id: 'crunches', name: 'Crunches', duration: 10, calories: 8},
-    {id: 'touch-toes', name: 'Touch Toes', duration: 60, calories: 15},
-    {id: 'side-lunges', name: 'Side Lunges', duration: 90, calories: 18},
-    {id: 'burpees', name: 'Burpees', duration: 120, calories: 8}
+    {id: 'crunches', name: 'Crunches', duration: 4, calories: 8},
+    {id: 'touch-toes', name: 'Touch Toes', duration: 10, calories: 15},
+    {id: 'side-lunges', name: 'Side Lunges', duration: 20, calories: 18},
+    {id: 'burpees', name: 'Burpees', duration: 1, calories: 8}
   ];
   doneExercises: ExerciseModel[] = [];
 
@@ -27,7 +27,8 @@ export class TrainingService {
 
   cancelExercise(progress: number): void {
     this.doneExercises.push(
-      {...this.currentTraining,
+      {
+        ...this.currentTraining,
         state: 'cancelled',
         date: new Date(),
         duration: this.currentTraining.duration * (progress / 100),
@@ -45,5 +46,9 @@ export class TrainingService {
 
   getCurrentExercise(): ExerciseModel {
     return this.currentTraining;
+  }
+
+  getCompletedOrCancelledExercises(): ExerciseModel[] {
+    return this.doneExercises.slice();
   }
 }
