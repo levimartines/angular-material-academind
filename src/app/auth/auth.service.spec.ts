@@ -32,9 +32,4 @@ describe('AuthService', () => {
   it('should logout', () => {
     expect(service.logout()).toBeFalsy();
   });
-
-  it('should get authenticated user', () => {
-    service.user = {id: '1', email: 'test@test.com'}
-    expect(service.getUser()).toBeTruthy();
-  });
 });

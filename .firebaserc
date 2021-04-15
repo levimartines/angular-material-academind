@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-material-academind": {
+      "hosting": {
+        "angular-material-academind": [
+          "angular-material-academind"
+        ]
+      }
+    }
+  }
+}

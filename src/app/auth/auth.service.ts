@@ -1,47 +1,62 @@
 import { Injectable } from '@angular/core';
-import { UserModel } from './user.model';
 import { AuthDataModel } from './auth-data.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { TrainingService } from '../training/training.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   authChange = new Subject<boolean>();
-  user: UserModel;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private auth: AngularFireAuth,
+    private trainingService: TrainingService) {
+  }
+
+  initAuthListener(): void {
+    this.auth.authState.subscribe((next) => {
+      if (next) {
+        this.authChange.next(true);
+        this.router.navigate(['/training']).then();
+      } else {
+        this.trainingService.cancelSubscriptions();
+        this.authChange.next(false);
+        this.router.navigate(['/login']).then();
+      }
+    });
   }
 
   register(authData: AuthDataModel): void {
-    this.user = {
-      email: authData.email,
-      id: Math.round(Math.random() * 1000).toString(10)
-    };
-    this.onSuccessfulLogin();
+    this.auth.createUserWithEmailAndPassword(authData.email, authData.password)
+      .then(res => {
+        console.log(res);
+        this.onSuccessfulLogin();
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   login(authData: AuthDataModel): void {
-    this.user = {
-      email: authData.email,
-      id: Math.round(Math.random() * 1000).toString(10)
-    };
-    this.onSuccessfulLogin();
+    this.auth.signInWithEmailAndPassword(authData.email, authData.password)
+      .then(res => {
+        console.log(res);
+        this.onSuccessfulLogin();
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   logout(): void {
-    this.user = null;
+    this.auth.signOut();
+    this.trainingService.cancelSubscriptions();
     this.authChange.next(false);
     this.router.navigate(['/login']).then();
-  }
-
-  isAuth(): boolean {
-    return !!this.user;
-  }
-
-  getUser(): UserModel {
-    return {...this.user};
   }
 
   onSuccessfulLogin(): void {
