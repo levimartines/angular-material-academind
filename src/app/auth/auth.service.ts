@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TrainingService } from '../training/training.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingService } from '../shared/loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class AuthService {
     private router: Router,
     private auth: AngularFireAuth,
     private trainingService: TrainingService,
+    private loadingService: LoadingService,
     private snackBar: MatSnackBar
   ) {
   }
@@ -34,6 +36,7 @@ export class AuthService {
   }
 
   register(authData: AuthDataModel): void {
+    this.loadingService.loadingStateChange.emit(true);
     this.auth.createUserWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
         console.log(res);
@@ -41,10 +44,12 @@ export class AuthService {
       })
       .catch(error => {
         this.snackBar.open(error.message, null, {duration: 3000});
-      });
+      })
+    .finally(() => this.loadingService.loadingStateChange.emit(false));
   }
 
   login(authData: AuthDataModel): void {
+    this.loadingService.loadingStateChange.emit(true);
     this.auth.signInWithEmailAndPassword(authData.email, authData.password)
       .then(res => {
         console.log(res);
@@ -52,7 +57,8 @@ export class AuthService {
       })
       .catch(error => {
         this.snackBar.open(error.message, null, {duration: 3000});
-      });
+      })
+    .finally(() => this.loadingService.loadingStateChange.emit(false));
   }
 
   logout(): void {

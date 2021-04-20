@@ -12,3 +12,7 @@ body {
 .mat-paginator-page-size {
   display: none !important;
 }
+
+.mt-30 {
+  margin-top: 30%;
+}

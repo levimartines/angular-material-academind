@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="!isLoading; else loading">
   <form #f="ngForm" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="submit(f)">
     <mat-form-field appearance="standard">
       <mat-label>E-mail</mat-label>
@@ -34,3 +34,9 @@
       color="primary" class="button-submit">Submit</button>
   </form>
 </section>
+
+<ng-template #loading>
+  <div fxLayoutAlign="center" class="mt-30">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

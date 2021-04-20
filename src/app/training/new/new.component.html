@@ -1,4 +1,4 @@
-<section fxLayout fxLayoutAlign="center" class="new-training">
+<section fxLayout fxLayoutAlign="center" class="new-training" *ngIf="!isLoading; else loading">
   <mat-card fxFlex="100%" fxFlex.gt-xs="400px">
     <mat-card-header fxLayoutAlign="center">
       <mat-card-title>Time to start a new training!</mat-card-title>
@@ -23,3 +23,9 @@
     </mat-card-actions>
   </mat-card>
 </section>
+
+<ng-template #loading>
+  <div fxLayoutAlign="center" class="mt-30">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
