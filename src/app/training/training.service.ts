@@ -3,7 +3,7 @@ import { ExerciseModel } from './exercise.model';
 import { Subject, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { LoadingService } from '../shared/loading.service';
+import { UiService } from '../shared/ui.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +18,11 @@ export class TrainingService {
 
   dbSubscriptions: Subscription[] = [];
 
-  constructor(private db: AngularFirestore, private loadingService: LoadingService) {
+  constructor(private db: AngularFirestore, private uiService: UiService) {
   }
 
   fetchAvailableExercises(): void {
-    this.loadingService.loadingStateChange.emit(true);
+    this.uiService.loadingStateChange.emit(true);
     this.dbSubscriptions.push(
       this.db.collection('availableExercises').snapshotChanges()
         .pipe(
@@ -38,8 +38,8 @@ export class TrainingService {
         ).subscribe((next: ExerciseModel[]) => {
         this.exercises = next;
         this.exercisesChanged.emit([...next]);
-        this.loadingService.loadingStateChange.emit(false)
-      }, err => this.loadingService.loadingStateChange.emit(false))
+        this.uiService.loadingStateChange.emit(false)
+      }, err => this.uiService.loadingStateChange.emit(false))
     );
   }
 

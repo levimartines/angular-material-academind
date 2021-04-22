@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TrainingService } from '../training.service';
 import { ExerciseModel } from '../exercise.model';
 import { Subscription } from 'rxjs';
-import { LoadingService } from '../../shared/loading.service';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
   selector: 'app-new',
@@ -15,11 +15,11 @@ export class NewComponent implements OnInit, OnDestroy {
   isLoading = false;
   isLoading$: Subscription;
 
-  constructor(private service: TrainingService, private loadingService: LoadingService) {
+  constructor(private service: TrainingService, private uiService: UiService) {
   }
 
   ngOnInit(): void {
-    this.isLoading$ = this.loadingService.loadingStateChange
+    this.isLoading$ = this.uiService.loadingStateChange
     .subscribe(next => this.isLoading = next);
     this.training$ = this.service.exercisesChanged.subscribe(next => this.trainings = next);
     this.service.fetchAvailableExercises();
