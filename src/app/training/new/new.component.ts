@@ -20,9 +20,9 @@ export class NewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isLoading$ = this.uiService.loadingStateChange
-    .subscribe(next => this.isLoading = next);
+      .subscribe(next => this.isLoading = next);
     this.training$ = this.service.exercisesChanged.subscribe(next => this.trainings = next);
-    this.service.fetchAvailableExercises();
+    this.fetchExercises();
   }
 
   startTraining(trainingId: string): void {
@@ -34,4 +34,7 @@ export class NewComponent implements OnInit, OnDestroy {
     this.isLoading$.unsubscribe();
   }
 
+  fetchExercises(): void {
+    this.service.fetchAvailableExercises();
+  }
 }

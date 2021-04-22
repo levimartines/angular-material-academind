@@ -16,9 +16,14 @@
 
     <mat-card-actions fxLayoutAlign="center">
       <button
-        mat-raised-button type="submit" color="primary"
+        mat-raised-button type="submit" color="primary" *ngIf="trainings"
         [disabled]="option.invalid" (click)="startTraining(option.value)">
         Start!
+      </button>
+      <button
+        mat-raised-button type="submit" color="primary"
+        *ngIf="!trainings" (click)="fetchExercises()">
+        Fetch Again!
       </button>
     </mat-card-actions>
   </mat-card>

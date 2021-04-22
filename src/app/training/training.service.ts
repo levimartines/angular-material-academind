@@ -38,8 +38,12 @@ export class TrainingService {
         ).subscribe((next: ExerciseModel[]) => {
         this.exercises = next;
         this.exercisesChanged.emit([...next]);
-        this.uiService.loadingStateChange.emit(false)
-      }, err => this.uiService.loadingStateChange.emit(false))
+        this.uiService.loadingStateChange.emit(false);
+      }, err => {
+        this.uiService.showSnackBar('Fetching exercises failed. Please try again later.');
+        this.exercisesChanged.emit(null);
+        this.uiService.loadingStateChange.emit(false);
+      })
     );
   }
 
