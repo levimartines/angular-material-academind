@@ -24,8 +24,4 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'angular-material-academind'`, () => {
-    expect(component.title).toEqual('angular-material-academind');
-  });
-
 });
