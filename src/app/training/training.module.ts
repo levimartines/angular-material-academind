@@ -4,6 +4,7 @@ import { CurrentComponent } from './current/current.component';
 import { NewComponent } from './new/new.component';
 import { PastComponent } from './past/past.component';
 import { SharedModule } from '../shared/shared.module';
+import { TrainingRoutingModule } from './training-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { SharedModule } from '../shared/shared.module';
     PastComponent,
   ],
   imports: [
-    SharedModule
+    SharedModule,
+    TrainingRoutingModule
   ],
   exports: [
     TrainingComponent,

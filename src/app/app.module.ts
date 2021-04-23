@@ -19,7 +19,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { AuthModule } from './auth/auth.module';
-import { TrainingModule } from './training/training.module';
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,7 +42,6 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    TrainingModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
