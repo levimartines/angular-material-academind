@@ -82,7 +82,7 @@ export class TrainingService {
   }
 
   cancelSubscriptions(): void {
-    this.dbSubscriptions.forEach(sub => sub.unsubscribe());
+    this.dbSubscriptions.forEach(sub => sub?.unsubscribe());
   }
 
   private saveExerciseInDatabase(exercise: ExerciseModel): void {

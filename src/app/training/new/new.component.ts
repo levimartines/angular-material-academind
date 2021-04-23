@@ -30,8 +30,8 @@ export class NewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.training$.unsubscribe();
-    this.isLoading$.unsubscribe();
+    this.training$?.unsubscribe();
+    this.isLoading$?.unsubscribe();
   }
 
   fetchExercises(): void {

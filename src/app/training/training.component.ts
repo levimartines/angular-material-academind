@@ -19,7 +19,7 @@ export class TrainingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.training$.unsubscribe();
+    this.training$?.unsubscribe();
   }
 
 }

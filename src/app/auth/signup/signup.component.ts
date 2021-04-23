@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.isLoading$.unsubscribe();
+    this.isLoading$?.unsubscribe();
   }
 
 }

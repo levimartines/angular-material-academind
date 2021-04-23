@@ -40,6 +40,6 @@ export class PastComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.dataSource$.unsubscribe();
+    this.dataSource$?.unsubscribe();
   }
 }

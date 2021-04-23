@@ -20,6 +20,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.isAuth$.unsubscribe();
+    this.isAuth$?.unsubscribe();
   }
 }
