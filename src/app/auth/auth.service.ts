@@ -4,8 +4,8 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TrainingService } from '../training/training.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UiService } from '../shared/ui.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,26 +37,26 @@ export class AuthService {
   register(authData: AuthDataModel): void {
     this.uiService.loadingStateChange.emit(true);
     this.auth.createUserWithEmailAndPassword(authData.email, authData.password)
-      .then(res => {
-        console.log(res);
-        this.onSuccessfulLogin();
-      })
-      .catch(error => {
-        this.uiService.showSnackBar(error.message);
-      })
+    .then(res => {
+      console.log(res);
+      this.onSuccessfulLogin();
+    })
+    .catch(error => {
+      this.uiService.showSnackBar(error.message);
+    })
     .finally(() => this.uiService.loadingStateChange.emit(false));
   }
 
   login(authData: AuthDataModel): void {
     this.uiService.loadingStateChange.emit(true);
     this.auth.signInWithEmailAndPassword(authData.email, authData.password)
-      .then(res => {
-        console.log(res);
-        this.onSuccessfulLogin();
-      })
-      .catch(error => {
-        this.uiService.showSnackBar(error.message);
-      })
+    .then(res => {
+      console.log(res);
+      this.onSuccessfulLogin();
+    })
+    .catch(error => {
+      this.uiService.showSnackBar(error.message);
+    })
     .finally(() => this.uiService.loadingStateChange.emit(false));
   }
 
@@ -70,6 +70,12 @@ export class AuthService {
   onSuccessfulLogin(): void {
     this.authChange.next(true);
     this.router.navigate(['/training']).then();
+  }
+
+  isAuth(): boolean {
+    let isAuth = false;
+    this.auth.user.pipe(take(1)).subscribe(next => isAuth = !!next);
+    return isAuth;
   }
 
 }
