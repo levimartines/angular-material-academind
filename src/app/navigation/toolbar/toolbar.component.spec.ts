@@ -22,9 +22,7 @@ describe('ToolbarComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', waitForAsync(() => {
-    const service = TestBed.inject(AuthService);
-    service.authChange.next(true);
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });

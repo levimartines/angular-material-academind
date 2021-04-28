@@ -14,8 +14,6 @@ import * as Auth from './auth.actions';
   providedIn: 'root'
 })
 export class AuthService {
-  authChange = new Subject<boolean>();
-
   constructor(
     private router: Router,
     private auth: AngularFireAuth,
