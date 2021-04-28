@@ -11,8 +11,8 @@ describe('NewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AppModule ],
-      providers: [ TrainingService ]
+      imports: [AppModule],
+      providers: [TrainingService]
     })
     .compileComponents();
   });

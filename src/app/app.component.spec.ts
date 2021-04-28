@@ -10,8 +10,8 @@ let el;
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ AppModule ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      imports: [AppModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(AppComponent);
       component = fixture.componentInstance;

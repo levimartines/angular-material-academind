@@ -25,21 +25,21 @@ export class TrainingService {
     this.uiService.loadingStateChange.emit(true);
     this.dbSubscriptions.push(
       this.db.collection('availableExercises').snapshotChanges()
-        .pipe(
-          map(collection => {
-            return collection.map(el => {
-              const data = el.payload.doc.data() as ExerciseModel;
-              return {
-                id: el.payload.doc.id,
-                ...data
-              };
-            });
-          })
-        ).subscribe((next: ExerciseModel[]) => {
+      .pipe(
+        map(collection => {
+          return collection.map(el => {
+            const data = el.payload.doc.data() as ExerciseModel;
+            return {
+              id: el.payload.doc.id,
+              ...data
+            };
+          });
+        })
+      ).subscribe((next: ExerciseModel[]) => {
         this.exercises = next;
         this.exercisesChanged.emit([...next]);
         this.uiService.loadingStateChange.emit(false);
-      }, err => {
+      }, () => {
         this.uiService.showSnackBar('Fetching exercises failed. Please try again later.');
         this.exercisesChanged.emit(null);
         this.uiService.loadingStateChange.emit(false);
@@ -78,7 +78,7 @@ export class TrainingService {
 
   fetchFinishedExercises(): void {
     this.dbSubscriptions.push(this.db.collection('finishedExercises').valueChanges()
-      .subscribe((next: ExerciseModel[]) => this.finishedExercisesChanged.emit(next)));
+    .subscribe((next: ExerciseModel[]) => this.finishedExercisesChanged.emit(next)));
   }
 
   cancelSubscriptions(): void {

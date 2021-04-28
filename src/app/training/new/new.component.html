@@ -1,4 +1,5 @@
-<section fxLayout fxLayoutAlign="center" class="new-training" *ngIf="!(isLoading$|async); else loading">
+<section *ngIf="!(isLoading$|async); else loading" class="new-training" fxLayout
+         fxLayoutAlign="center">
   <mat-card fxFlex="100%" fxFlex.gt-xs="400px">
     <mat-card-header fxLayoutAlign="center">
       <mat-card-title>Time to start a new training!</mat-card-title>
@@ -6,7 +7,7 @@
     <mat-card-content fxLayoutAlign="center">
       <mat-form-field appearance="fill">
         <mat-label>Choose a exercise</mat-label>
-        <mat-select ngModel required #option="ngModel">
+        <mat-select #option="ngModel" ngModel required>
           <mat-option *ngFor="let type of trainings" [value]="type.id">
             {{type.name}}
           </mat-option>
@@ -16,13 +17,14 @@
 
     <mat-card-actions fxLayoutAlign="center">
       <button
-        mat-raised-button type="submit" color="primary" *ngIf="trainings"
-        [disabled]="option.invalid" (click)="startTraining(option.value)">
+        (click)="startTraining(option.value)" *ngIf="trainings" [disabled]="option.invalid"
+        color="primary"
+        mat-raised-button type="submit">
         Start!
       </button>
       <button
-        mat-raised-button type="submit" color="primary"
-        *ngIf="!trainings" (click)="fetchExercises()">
+        (click)="fetchExercises()" *ngIf="!trainings" color="primary"
+        mat-raised-button type="submit">
         Fetch Again!
       </button>
     </mat-card-actions>
@@ -30,7 +32,7 @@
 </section>
 
 <ng-template #loading>
-  <div fxLayoutAlign="center" class="mt-30">
+  <div class="mt-30" fxLayoutAlign="center">
     <mat-spinner></mat-spinner>
   </div>
 </ng-template>

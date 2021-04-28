@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div fxHide.gt-xs>
-    <button mat-icon-button aria-label="menu icon" (click)="toggleSidenav.emit()">
+    <button (click)="toggleSidenav.emit()" aria-label="menu icon" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
   </div>
@@ -9,8 +9,8 @@
     <a routerLink="/">NG Training Master</a>
   </div>
 
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayout fxLayoutGap="16px" class="nav-items">
+  <div fxFlex fxHide.xs fxLayout fxLayoutAlign="flex-end">
+    <ul class="nav-items" fxLayout fxLayoutGap="16px">
       <li *ngIf="!(isAuth$ | async)">
         <a routerLink="/login">Login</a>
       </li>

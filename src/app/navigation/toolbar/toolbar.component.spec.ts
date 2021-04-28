@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToolbarComponent } from './toolbar.component';
 import { AppModule } from '../../app.module';
@@ -10,8 +10,8 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AppModule ],
-      providers: [ AuthService ]
+      imports: [AppModule],
+      providers: [AuthService]
     })
     .compileComponents();
   });

@@ -10,8 +10,8 @@ describe('SidenavListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AppModule ],
-      providers: [ AuthService ]
+      imports: [AppModule],
+      providers: [AuthService]
     })
     .compileComponents();
   });

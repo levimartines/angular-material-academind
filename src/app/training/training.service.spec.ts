@@ -13,7 +13,7 @@ describe('AuthService', () => {
         AppModule,
         HttpClientTestingModule,
       ],
-      providers: [ TrainingService ]
+      providers: [TrainingService]
     });
     service = TestBed.inject(TrainingService);
     httpTestingController = TestBed.inject(HttpTestingController);

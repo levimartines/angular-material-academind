@@ -9,7 +9,7 @@ describe('WelcomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ AppModule ]
+      imports: [AppModule]
     })
     .compileComponents();
   });

@@ -1,12 +1,12 @@
-<section fxLayout="column" fxLayoutAlign="center center" class="current-training">
+<section class="current-training" fxLayout="column" fxLayoutAlign="center center">
   <mat-progress-spinner
+    [value]="progressValue"
     color="primary"
-    mode="determinate"
-    [value]="progressValue">
+    mode="determinate">
   </mat-progress-spinner>
 
   <h1> Progress {{progressValue}}%</h1>
   <p>Keep going, you can do this!</p>
 
-  <button mat-raised-button color="warn" (click)="stopTraining()">Stop</button>
+  <button (click)="stopTraining()" color="warn" mat-raised-button>Stop</button>
 </section>

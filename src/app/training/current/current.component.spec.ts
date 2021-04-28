@@ -14,9 +14,9 @@ describe('CurrentComponent', () => {
   let responseControl = true;
 
   const mockDialog = {
-    open: function () {
+    open: () => {
       return {
-        afterClosed: function () {
+        afterClosed: () => {
           return new BehaviorSubject(responseControl);
         }
       };
@@ -37,7 +37,7 @@ describe('CurrentComponent', () => {
   beforeEach(() => {
     service = TestBed.inject(TrainingService);
     spyOn(service, 'getCurrentExercise')
-      .and.returnValue({id: 'burpees', name: 'Burpees', duration: 1, calories: 8});
+    .and.returnValue({id: 'burpees', name: 'Burpees', duration: 1, calories: 8});
     responseControl = !responseControl;
     fixture = TestBed.createComponent(CurrentComponent);
     component = fixture.componentInstance;
