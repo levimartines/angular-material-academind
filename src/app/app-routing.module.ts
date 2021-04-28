@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AuthGuard } from './auth/auth.guard';
+import { redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   {
@@ -10,7 +12,7 @@ const routes: Routes = [
   {
     path: 'training',
     loadChildren: () => import('./training/training.module').then(m => m.TrainingModule),
-    canLoad: [AuthGuard]
+    data: {authGuardPipe: redirectUnauthorizedToLogin}
   }
 ];
 

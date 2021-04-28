@@ -6,6 +6,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { TrainingService } from '../training/training.service';
 import { UiService } from '../shared/ui.service';
 import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../app.reducer';
+import * as UI from '../shared/ui.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +21,7 @@ export class AuthService {
     private auth: AngularFireAuth,
     private trainingService: TrainingService,
     private uiService: UiService,
+    private store: Store<{ui: fromRoot.State}>
   ) {
   }
 
@@ -35,29 +39,28 @@ export class AuthService {
   }
 
   register(authData: AuthDataModel): void {
-    this.uiService.loadingStateChange.emit(true);
+    this.store.dispatch(new UI.StartLoading());
     this.auth.createUserWithEmailAndPassword(authData.email, authData.password)
-    .then(res => {
-      console.log(res);
-      this.onSuccessfulLogin();
-    })
-    .catch(error => {
-      this.uiService.showSnackBar(error.message);
-    })
-    .finally(() => this.uiService.loadingStateChange.emit(false));
+      .then(res => {
+        console.log(res);
+        this.onSuccessfulLogin();
+      })
+      .catch(error => {
+        this.uiService.showSnackBar(error.message);
+      })
+      .finally(() => this.store.dispatch(new UI.StopLoading()));
   }
 
   login(authData: AuthDataModel): void {
-    this.uiService.loadingStateChange.emit(true);
+    this.store.dispatch(new UI.StartLoading());
     this.auth.signInWithEmailAndPassword(authData.email, authData.password)
-    .then(res => {
-      console.log(res);
-      this.onSuccessfulLogin();
-    })
-    .catch(error => {
-      this.uiService.showSnackBar(error.message);
-    })
-    .finally(() => this.uiService.loadingStateChange.emit(false));
+      .then(res => {
+        this.onSuccessfulLogin();
+      })
+      .catch(error => {
+        this.uiService.showSnackBar(error.message);
+      })
+      .finally(() => this.store.dispatch(new UI.StopLoading()));
   }
 
   logout(): void {
@@ -74,7 +77,7 @@ export class AuthService {
 
   isAuth(): boolean {
     let isAuth = false;
-    this.auth.user.pipe(take(1)).subscribe(next => isAuth = !!next);
+    this.authChange.pipe(take(1)).subscribe(next => isAuth = next);
     return isAuth;
   }
 

@@ -1,4 +1,4 @@
-<section *ngIf="!isLoading; else loading">
+<section *ngIf="!(isLoading$ | async); else loading">
   <form
     fxLayout="column" fxLayoutAlign="center center"
     (ngSubmit)="submit()" [formGroup]="form">
