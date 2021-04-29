@@ -9,21 +9,13 @@ $custom-typography: mat-typography-config(
 );
 @include mat-base-typography($custom-typography);
 
-$omni-primary: mat-palette($mat-gray, 500);
-$omni-accent: mat-palette($mat-pink, A200, A100, A400);
-$theme: mat-dark-theme((
-  color: (
-    primary: $omni-primary,
-    accent: $omni-accent
-  )
-));
-@include angular-material-theme($theme);
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
 
-$toolbar-palette: mat-palette($mat-blue-gray, 800);
-$toolbar-theme: mat-dark-theme((
+$candy-app-theme: mat-dark-theme((
   color: (
-    primary: $toolbar-palette,
-    accent: $omni-accent
+    primary: $candy-app-primary,
+    accent: $candy-app-accent,
   )
 ));
-@include mat-toolbar-color($toolbar-theme)
+@include angular-material-theme($candy-app-theme);
