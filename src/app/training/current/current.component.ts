@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StopTrainingComponent } from './stop-training.component';
 import { TrainingService } from '../training.service';
-import { ExerciseModel } from '../exercise.model';
+import { Store } from '@ngrx/store';
+import * as fromTraining from '../training.reducer';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-current',
@@ -10,30 +12,31 @@ import { ExerciseModel } from '../exercise.model';
   styleUrls: ['./current.component.css']
 })
 export class CurrentComponent implements OnInit {
-  exercise: ExerciseModel;
   progressValue = 0;
   interval: any;
 
   constructor(
     private dialog: MatDialog,
-    private service: TrainingService
+    private service: TrainingService,
+    private store: Store<fromTraining.State>
   ) {
   }
 
   ngOnInit(): void {
-    this.exercise = this.service.getCurrentExercise();
     this.startTraining();
   }
 
   startTraining(): void {
-    const stepTime = this.exercise.duration / 60;
-    this.interval = setInterval(() => {
-      this.progressValue += 1;
-      if (this.progressValue >= 100) {
-        clearInterval(this.interval);
-        this.service.finishExercise();
-      }
-    }, stepTime * 1000);
+    this.store.select(fromTraining.getActiveTraining).pipe(take(1)).subscribe(exercise => {
+      const stepTime = exercise.duration / 60;
+      this.interval = setInterval(() => {
+        this.progressValue += 1;
+        if (this.progressValue >= 100) {
+          clearInterval(this.interval);
+          this.service.completeTraining();
+        }
+      }, stepTime * 1000);
+    });
   }
 
   stopTraining(): void {
@@ -45,7 +48,7 @@ export class CurrentComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(next => {
       if (next) {
-        this.service.cancelExercise(this.progressValue);
+        this.service.cancelTraining(this.progressValue);
       } else {
         this.startTraining();
       }

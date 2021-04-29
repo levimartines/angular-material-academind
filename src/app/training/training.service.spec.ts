@@ -19,15 +19,8 @@ describe('AuthService', () => {
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  it('should start exercise and cancel a exercise', () => {
-    service.startExercise('crunches');
-    service.cancelExercise(50);
-    expect(service.getCurrentExercise()).toEqual(null);
-  });
-  it('should start exercise and finish a exercise', () => {
-    service.startExercise('crunches');
-    service.finishExercise();
-    expect(service.getCurrentExercise()).toEqual(null);
+  it('should exist', () => {
+    expect(service).toBeTruthy();
   });
 
 });

@@ -28,6 +28,5 @@ describe('TrainingComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    service.exerciseStartStop.next();
   });
 });

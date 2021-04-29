@@ -8,7 +8,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Choose a exercise</mat-label>
         <mat-select #option="ngModel" ngModel required>
-          <mat-option *ngFor="let type of trainings" [value]="type.id">
+          <mat-option *ngFor="let type of training$ | async" [value]="type.id">
             {{type.name}}
           </mat-option>
         </mat-select>
@@ -17,13 +17,13 @@
 
     <mat-card-actions fxLayoutAlign="center">
       <button
-        (click)="startTraining(option.value)" *ngIf="trainings" [disabled]="option.invalid"
+        (click)="startTraining(option.value)" *ngIf="training$ | async" [disabled]="option.invalid"
         color="primary"
         mat-raised-button type="submit">
         Start!
       </button>
       <button
-        (click)="fetchExercises()" *ngIf="!trainings" color="primary"
+        (click)="fetchExercises()" *ngIf="!(training$ | async)" color="primary"
         mat-raised-button type="submit">
         Fetch Again!
       </button>
